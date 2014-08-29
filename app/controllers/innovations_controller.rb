@@ -5,26 +5,17 @@ class InnovationsController < ApplicationController
   # GET /innovations.json
   def index
     @innovations = Innovation.all
-    respond_to do |format|
-      format.json { render json: @innovations.to_json(:include => :category)}
-    end
+    render json: @innovations.to_json(:include => :category)
   end
 
   # GET /innovations/1
   # GET /innovations/1.json
   def show
-    respond_to do |format|
-      format.json { render json: @innovation.to_json(:include => :category)}
+    if @innovation
+      render json: @innovation.to_json(:include => :innovations)
+    else
+      render json: { error: "No innovation with id: #{params[:id]}"}, status: 400
     end
-  end
-
-  # GET /innovations/new
-  def new
-    @innovation = Innovation.new
-  end
-
-  # GET /innovations/1/edit
-  def edit
   end
 
   # POST /innovations
@@ -32,28 +23,20 @@ class InnovationsController < ApplicationController
   def create
     @innovation = Innovation.new(innovation_params)
 
-    respond_to do |format|
-      if @innovation.save
-        format.html { redirect_to @innovation, notice: 'Innovation was successfully created.' }
-        format.json { render :show, status: :created, location: @innovation }
-      else
-        format.html { render :new }
-        format.json { render json: @innovation.errors, status: :unprocessable_entity }
-      end
+    if @innovation.save
+      render :show, status: :created, location: @innovation
+    else
+      render json: @innovation.errors, status: :unprocessable_entity
     end
   end
 
   # PATCH/PUT /innovations/1
   # PATCH/PUT /innovations/1.json
   def update
-    respond_to do |format|
-      if @innovation.update(innovation_params)
-        format.html { redirect_to @innovation, notice: 'Innovation was successfully updated.' }
-        format.json { render :show, status: :ok, location: @innovation }
-      else
-        format.html { render :edit }
-        format.json { render json: @innovation.errors, status: :unprocessable_entity }
-      end
+    if @innovation.update(innovation_params)
+      render :show, status: :ok, location: @innovation
+    else
+      render json: @innovation.errors, status: :unprocessable_entity
     end
   end
 
@@ -61,16 +44,13 @@ class InnovationsController < ApplicationController
   # DELETE /innovations/1.json
   def destroy
     @innovation.destroy
-    respond_to do |format|
-      format.html { redirect_to innovations_url, notice: 'Innovation was successfully destroyed.' }
-      format.json { head :no_content }
-    end
+    head :no_content
   end
 
   private
     # Use callbacks to share common setup or constraints between actions.
     def set_innovation
-      @innovation = Innovation.find(params[:id])
+      @innovation = Innovation.find_by_id(params[:id])
     end
 
     # Never trust parameters from the scary internet, only allow the white list through.
