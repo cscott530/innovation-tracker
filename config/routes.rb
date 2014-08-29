@@ -1,4 +1,8 @@
 Rails.application.routes.draw do
+  resources :organization_innovations
+
+  resources :organizations
+
   resources :innovations
 
   resources :categories

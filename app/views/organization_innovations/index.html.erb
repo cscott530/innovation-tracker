@@ -1,0 +1,23 @@
+<h1>Listing organization_innovations</h1>
+
+<table>
+  <thead>
+    <tr>
+      <th colspan="3"></th>
+    </tr>
+  </thead>
+
+  <tbody>
+    <% @organization_innovations.each do |organization_innovation| %>
+      <tr>
+        <td><%= link_to 'Show', organization_innovation %></td>
+        <td><%= link_to 'Edit', edit_organization_innovation_path(organization_innovation) %></td>
+        <td><%= link_to 'Destroy', organization_innovation, method: :delete, data: { confirm: 'Are you sure?' } %></td>
+      </tr>
+    <% end %>
+  </tbody>
+</table>
+
+<br>
+
+<%= link_to 'New Organization innovation', new_organization_innovation_path %>

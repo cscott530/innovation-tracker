@@ -96,3 +96,31 @@ Innovation.create([
 		category: experience
 	}
 ]);
+
+
+#TODO add some well-known/agreed-upon organization data
+def add_innovation(organization, innovationName)
+	innovation = Innovation.where(name: innovationName).take
+	if innovation
+		OrganizationInnovation.create({
+			organization: organization,
+			innovation: innovation
+		});	
+	end
+end
+
+
+google = Organization.create({
+	name: "Google",
+	url: "http://www.google.com",
+	description: "Google..."
+});
+add_innovation(google, "Profit Model");
+add_innovation(google, "Structure");
+add_innovation(google, "Network");
+add_innovation(google, "Process");
+add_innovation(google, "Product Performance");
+add_innovation(google, "Product System");
+add_innovation(google, "Service");
+add_innovation(google, "Channel");
+add_innovation(google, "Brand");
