@@ -23,7 +23,7 @@ class OrganizationInnovationsController < ApplicationController
     @organization_innovation = OrganizationInnovation.new(organization_innovation_params)
 
     if @organization_innovation.save
-      render :show, status: :created, location: @organization_innovation
+      render json: @organization_innovation.to_json(:include => :innovations)
     else
       render json: @organization_innovation.errors, status: :unprocessable_entity
     end
@@ -32,18 +32,26 @@ class OrganizationInnovationsController < ApplicationController
   # PATCH/PUT /organization_innovations/1
   # PATCH/PUT /organization_innovations/1.json
   def update
-    if @organization_innovation.update(organization_innovation_params)
-      render :show, status: :ok, location: @organization_innovation
+    if @organization_innovation
+      if @organization_innovation.update(organization_innovation_params)
+        render json: @organization_innovation.to_json(:include => :innovations)
+      else
+        render json: @organization_innovation.errors, status: :unprocessable_entity
+      end
     else
-      render json: @organization_innovation.errors, status: :unprocessable_entity
+      render json: { error: "No organization:innovation with id: #{params[:id]}"}, status: 400
     end
   end
 
   # DELETE /organization_innovations/1
   # DELETE /organization_innovations/1.json
   def destroy
-    @organization_innovation.destroy
-    head :no_content
+    if @organization_innovation
+      @organization_innovation.destroy
+      head :no_content
+    else
+      render json: { error: "No organization:innovation with id: #{params[:id]}"}, status: 400
+    end
   end
 
   private

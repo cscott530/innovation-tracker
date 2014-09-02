@@ -24,7 +24,8 @@ class OrganizationsController < ApplicationController
     @organization = Organization.new(organization_params)
 
     if @organization.save
-      render :show, status: :created, location: @organization
+      save_innovations
+      render json: @organization.to_json(:include => :innovations)
     else
       render json: @organization.errors, status: :unprocessable_entity
     end
@@ -33,18 +34,27 @@ class OrganizationsController < ApplicationController
   # PATCH/PUT /organizations/1
   # PATCH/PUT /organizations/1.json
   def update
-    if @organization.update(organization_params)
-      render :show, status: :ok, location: @organization
+    if @organization
+      if @organization.update(organization_params)
+        save_innovations
+        render json: @organization.to_json(:include => :innovations)
+      else
+        render json: @organization.errors, status: :unprocessable_entity
+      end
     else
-      render json: @organization.errors, status: :unprocessable_entity
+      render json: { error: "No organization with id: #{params[:id]}"}, status: 400
     end
   end
 
   # DELETE /organizations/1
   # DELETE /organizations/1.json
   def destroy
-    @organization.destroy
-    head :no_content
+    if @organization
+      @organization.destroy
+      head :no_content
+    else
+      render json: { error: "No organization with id: #{params[:id]}"}, status: 400
+    end
   end
 
   private
@@ -56,5 +66,21 @@ class OrganizationsController < ApplicationController
     # Never trust parameters from the scary internet, only allow the white list through.
     def organization_params
       params.require(:organization).permit(:name, :description, :url)
+    end
+
+    def save_innovations
+      if params[:organization][:innovations]
+        #delete all entries for innovations in the join table
+        @organization.organization_innovations.delete_all
+
+        #loop over innovations by id and remap to Innovation objects, then create join
+        innovations = params[:organization][:innovations].each do | i |
+          innovation = Innovation.find_by_id(i[:id])
+          OrganizationInnovation.create({
+            organization: @organization,
+            innovation: innovation
+          });
+        end
+      end
     end
 end
