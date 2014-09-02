@@ -24,7 +24,7 @@ class CategoriesController < ApplicationController
     @category = Category.new(category_params)
 
     if @category.save
-      render :show, status: :created, location: @category
+      render json: @category.to_json
     else
       render json: @category.errors, status: :unprocessable_entity
     end
@@ -33,20 +33,26 @@ class CategoriesController < ApplicationController
   # PATCH/PUT /categories/1
   # PATCH/PUT /categories/1.json
   def update
-    respond_to do |format|
+    if @category
       if @category.update(category_params)
-        render :show, status: :ok, location: @category
+        render json: @category.to_json
       else
         render json: @category.errors, status: :unprocessable_entity
       end
+    else
+      render json: { error: "No category with id: #{params[:id]}"}, status: 400
     end
   end
 
   # DELETE /categories/1
   # DELETE /categories/1.json
   def destroy
-    @category.destroy
-    head :no_content
+    if @category
+      @category.destroy
+      head :no_content
+    else
+      render json: { error: "No category with id: #{params[:id]}"}, status: 400
+    end
   end
 
   private
