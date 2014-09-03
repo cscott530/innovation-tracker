@@ -5,4 +5,8 @@ class ApplicationController < ActionController::Base
 
 #TODO we might want to reinstate this once the app has a real front-end.
   skip_before_action :verify_authenticity_token
+
+  def index
+  	
+  end
 end
