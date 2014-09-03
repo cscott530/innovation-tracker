@@ -13,7 +13,11 @@
 //= require ../../../vendor/assets/bower_components/jquery/dist/jquery.js
 //= require ../../../vendor/assets/bower_components/bootstrap/dist/js/bootstrap.js
 //= require ../../../vendor/assets/bower_components/angular/angular.js
+//= require ../../../vendor/assets/bower_components/angular-resource/angular-resource.js
 //= require turbolinks
 //= require_tree .
 
-angular.module('innovationtracker', []);
+var app = angular.module('innovationtracker', ['it.resources']);
+app.controller('IndexCtrl', function($scope, Innovation, Category, Organization) {
+	$scope.categories = Category.query();
+});

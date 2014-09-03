@@ -7,6 +7,16 @@
   <%= csrf_meta_tags %>
 </head>
 <body ng-app="innovationtracker">
-	{{3 + 4}} should be 7 if angular is installed.
+	<div ng-controller="IndexCtrl">
+		<div ng-repeat="category in categories | orderBy:category.order" class="category">
+			<h3>{{category.name}}</h3>
+
+			<div ng-repeat="innovation in category.innovations | orderBy:innovation.order" class="innovation">
+				<h4>{{innovation.name}}</h4>
+				<span class="caption">{{innovation.caption}}</span>
+				<div class="description">{{innovation.description}}</div>
+			</div>
+		</div>
+	</div>
 </body>
 </html>
