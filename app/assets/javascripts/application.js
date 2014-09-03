@@ -10,7 +10,10 @@
 // Read Sprockets README (https://github.com/sstephenson/sprockets#sprockets-directives) for details
 // about supported directives.
 //
-//= require jquery
-//= require jquery_ujs
+//= require ../../../vendor/assets/bower_components/jquery/dist/jquery.js
+//= require ../../../vendor/assets/bower_components/bootstrap/dist/js/bootstrap.js
+//= require ../../../vendor/assets/bower_components/angular/angular.js
 //= require turbolinks
 //= require_tree .
+
+angular.module('innovationtracker', []);

@@ -24,4 +24,4 @@ config/secrets.yml
 .rvmrc
 
 # no need to commit bower packages
-bower_components/
+vendor/assets/bower_components/
