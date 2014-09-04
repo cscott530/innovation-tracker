@@ -1,0 +1,13 @@
+<h3>
+{{organization.name}}
+</h3>
+
+<div>
+	Url: <a href="{{organization.url}}">{{organization.url}}</a>
+</div>
+
+<div class="innovations">
+	<div class="innovation" ng-repeat="innovation in organization.innovations">
+		<h4>{{innovation.name}}</h4>
+	</div>
+</div>

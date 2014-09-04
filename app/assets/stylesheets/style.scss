@@ -1,0 +1,21 @@
+body {
+	padding-top: 70px;
+}
+
+.category {
+	> i {
+		cursor: pointer;
+		display: inline-block;
+		width: 25px;
+	}
+	> h3 {
+		cursor: pointer;
+		display: inline-block;
+	}
+
+	.innovation {
+		&.collapsed {
+			display: none;
+		}
+	}
+}
