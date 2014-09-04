@@ -1,0 +1,22 @@
+<div class="form-header row">
+	<span class="page-title col-xs-12 col-sm-8">{{title}}</span>
+	<span class="form-controls col-xs-12 col-sm-4">
+		<a ng-click="saveOrganization()" class="btn btn-default">Save <i class="fa fa-floppy-o"></i></a>
+		<a ng-click="deleteOrganization()" class="btn btn-danger">Delete <i class="fa fa-trash"></i></a>
+	</span>
+</div>
+
+<div role="form">
+	<div class="form-group">
+		<label for="name">Name</label>
+		<input type="text" class="form-control" id="name" ng-model="organization.name" />
+	</div>
+	<div class="form-group">
+		<label for="url">URL</label>
+		<input type="url" class="form-control" id="url" ng-model="organization.url" />
+	</div>
+	<div class="form-group">
+		<label for="description">Description</label>
+		<textarea class="form-control" id="description" ng-model="organization.description" />
+	</div>
+</div>

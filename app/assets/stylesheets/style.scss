@@ -2,6 +2,8 @@ body {
 	padding-top: 70px;
 }
 
+$xs-break: 767px;	//use w/ max-width
+
 .category {
 	> i {
 		cursor: pointer;
@@ -16,6 +18,20 @@ body {
 	.innovation {
 		&.collapsed {
 			display: none;
+		}
+	}
+}
+
+.form-header {
+	.page-title {
+		font-size: 2em;
+	}
+
+	.form-controls {
+		text-align: right;
+
+		@media screen and (max-width: $xs-break) {
+			text-align: initial;
 		}
 	}
 }

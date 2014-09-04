@@ -21,23 +21,36 @@
 angular.module('innovationtracker', ['ngRoute',
 	'it.innovations',
 	'it.organizations',
-	'it.organization.new',
+	'it.organization.edit',
 	'it.organization.view',
 	'it.resources'])
 .config(function($routeProvider) {
 	$routeProvider.when('/organizations', {
 		templateUrl: 'partials/organizations.html',
-		controller: 'OrganizationsCtrl'
+		controller: 'OrganizationsCtrl',
+		title: 'Organizations'
 	}).when('/organization/new', {
-		templateUrl: 'partials/new-organization.html',
-		controller: 'CreateOrganizationCtrl'
+		templateUrl: 'partials/organization-edit.html',
+		controller: 'EditOrganizationCtrl'
 	}).when('/organization/:id', {
 		templateUrl: 'partials/organization.html',
 		controller: 'ViewOrganizationCtrl'
+	}).when('/organization/:id/edit', {
+		templateUrl: 'partials/organization-edit.html',
+		controller: 'EditOrganizationCtrl'
 	}).when('/innovations/', {
 		templateUrl: 'partials/innovations.html',
 		controller: 'InnovationsCtrl'
 	}).otherwise({
 		redirectTo: '/organizations'
+	});
+}).run(function($rootScope) {
+	$rootScope.$on("$routeChangeSuccess", function(currentRoute, previousRoute){
+	    //Change page title, based on Route information
+	    if (currentRoute.title) {
+	    	$rootScope.subtitle = ' - ' + currentRoute.title;
+	    } else {
+	    	$rootScope.subtitle = '';
+	    }
 	});
 });
