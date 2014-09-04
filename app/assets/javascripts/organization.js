@@ -1,5 +1,5 @@
 angular.module('it.organization.view', ['it.resources'])
-.controller('ViewOrganizationCtrl', function($scope, Organization, Innovation) {
-	$scope.innovations = Innovation.query();
-	$scope.organizations = Organization.query();
+.controller('ViewOrganizationCtrl', function($scope, $routeParams, Organization, Innovation) {
+	var organizationId = $routeParams.id;
+	$scope.organization = Organization.get({ id: organizationId });
 });
