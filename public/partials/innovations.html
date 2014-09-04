@@ -1,0 +1,10 @@
+<div>
+	<div ng-repeat="category in categories | orderBy:order" class="category">
+		<h3>{{category.name}}</h3>
+		<div ng-repeat="innovation in category.innovations | orderBy:order" class="innovation row">
+			<div class="col-sm-3">{{innovation.name}}</div>
+			<div class="col-sm-4">{{innovation.caption}}</div>
+			<div class="col-sm-5">{{innovation.description}}</div>
+		</div>
+	</div>
+</div>

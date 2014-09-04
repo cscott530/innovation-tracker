@@ -18,7 +18,8 @@
 //= require turbolinks
 //= require_tree .
 
-angular.module('innovationtracker', ['ngRoute', 
+angular.module('innovationtracker', ['ngRoute',
+	'it.innovations',
 	'it.organizations',
 	'it.organization.new',
 	'it.organization.view',
@@ -33,6 +34,9 @@ angular.module('innovationtracker', ['ngRoute',
 	}).when('/organization/:id', {
 		templateUrl: 'partials/organization.html',
 		controller: 'ViewOrganizationCtrl'
+	}).when('/innovations/', {
+		templateUrl: 'partials/innovations.html',
+		controller: 'InnovationsCtrl'
 	}).otherwise({
 		redirectTo: '/organizations'
 	});
