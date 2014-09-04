@@ -13,11 +13,27 @@
 //= require ../../../vendor/assets/bower_components/jquery/dist/jquery.js
 //= require ../../../vendor/assets/bower_components/bootstrap/dist/js/bootstrap.js
 //= require ../../../vendor/assets/bower_components/angular/angular.js
+//= require ../../../vendor/assets/bower_components/angular-route/angular-route.js
 //= require ../../../vendor/assets/bower_components/angular-resource/angular-resource.js
 //= require turbolinks
 //= require_tree .
 
-var app = angular.module('innovationtracker', ['it.resources']);
-app.controller('IndexCtrl', function($scope, Innovation, Category, Organization) {
-	$scope.categories = Category.query();
+angular.module('innovationtracker', ['ngRoute', 
+	'it.organizations',
+	'it.organization.new',
+	'it.organization.view',
+	'it.resources'])
+.config(function($routeProvider) {
+	$routeProvider.when('/organizations', {
+		templateUrl: 'partials/organizations.html',
+		controller: 'OrganizationsCtrl'
+	}).when('/organization/new', {
+		templateUrl: 'partials/new-organization.html',
+		controller: 'CreateOrganizationCtrl'
+	}).when('/organization/:id', {
+		templateUrl: 'partials/organization.html',
+		controller: 'ViewOrganizationCtrl'
+	}).otherwise({
+		redirectTo: '/organizations'
+	});
 });

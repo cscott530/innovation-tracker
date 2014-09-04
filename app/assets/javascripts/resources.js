@@ -7,5 +7,5 @@ resources.factory('Category', function($resource) {
 	return $resource('/categories/:id');
 });
 resources.factory('Organization', function($resource) {
-	return $resource('/organizatios/:id');
+	return $resource('/organizations/:id');
 });

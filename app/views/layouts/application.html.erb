@@ -7,16 +7,15 @@
   <%= csrf_meta_tags %>
 </head>
 <body ng-app="innovationtracker">
-	<div ng-controller="IndexCtrl">
-		<div ng-repeat="category in categories | orderBy:category.order" class="category">
-			<h3>{{category.name}}</h3>
-
-			<div ng-repeat="innovation in category.innovations | orderBy:innovation.order" class="innovation">
-				<h4>{{innovation.name}}</h4>
-				<span class="caption">{{innovation.caption}}</span>
-				<div class="description">{{innovation.description}}</div>
-			</div>
-		</div>
+	<ul class="menu">
+		<li>
+			<a href="#/organizations">Organizations</a>
+		</li>
+		<li>
+			<a href="#/organization/new">Add Organization</a>
+		</li>
+	</ul>
+	<div ng-view>
 	</div>
 </body>
 </html>
