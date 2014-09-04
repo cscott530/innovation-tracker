@@ -1,8 +1,11 @@
 <div>
 	<div ng-repeat="category in categories | orderBy:order" class="category">
-		<h3>{{category.name}}</h3>
-		<div ng-repeat="innovation in category.innovations | orderBy:order" class="innovation row">
-			<div class="col-sm-3">{{innovation.name}}</div>
+		<i class="fa fa-2x" ng-class="{ 'fa-caret-right' : category.collapsed, 'fa-caret-down' : !category.collapsed }"></i>
+		<h3 ng-click="category.collapsed = !category.collapsed">
+			{{category.name}}
+		</h3>
+		<div ng-repeat="innovation in category.innovations | orderBy:order" class="innovation row" ng-class="{ collapsed : category.collapsed }">
+			<h4 class="col-sm-3">{{innovation.name}}</h4>
 			<div class="col-sm-4">{{innovation.caption}}</div>
 			<div class="col-sm-5">{{innovation.description}}</div>
 		</div>
