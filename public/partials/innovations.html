@@ -1,4 +1,5 @@
 <div>
+	<!-- TODO: this page is severely understyled... -->
 	<div ng-repeat="category in categories | orderBy:order" class="category">
 		<i class="fa fa-2x" ng-class="{ 'fa-caret-right' : category.collapsed, 'fa-caret-down' : !category.collapsed }"></i>
 		<h3 ng-click="category.collapsed = !category.collapsed">

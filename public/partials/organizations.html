@@ -2,15 +2,20 @@
 	<thead>
 		<tr>
 			<td>Name</td>
+			<td>URL</td>
 			<td>Description</td>
 			<td>Innovations</td>
 		</tr>
 	</thead>
 	<tbody>
 		<tr ng-repeat="org in organizations">
-			<td><a href="{{org.url}}">{{org.name}}</a></td>
+			<td>{{org.name}}</td>
+			<td><a ng-if="org.url" href="{{org.url}}">{{org.url}}</a></td>
 			<td>{{org.description}}</td>
-			<td><a href="#/organization/{{org.id}}">{{org.innovations.length}} / {{innovations.length}}</a></td>
+			<td>
+				{{org.innovations.length}} / {{innovations.length}}
+				<a href="#/organization/{{org.id}}">Details</a>
+			</td>
 		</tr>
 	</tbody>
 </table>
