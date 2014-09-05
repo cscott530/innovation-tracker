@@ -65,16 +65,16 @@ class OrganizationsController < ApplicationController
 
     # Never trust parameters from the scary internet, only allow the white list through.
     def organization_params
-      params.require(:organization).permit(:name, :description, :url)
+      params.permit(:name, :description, :url)
     end
 
     def save_innovations
-      if params[:organization][:innovations]
+      if params[:innovations]
         #delete all entries for innovations in the join table
         @organization.organization_innovations.delete_all
 
         #loop over innovations by id and remap to Innovation objects, then create join
-        innovations = params[:organization][:innovations].each do | i |
+        innovations = params[:innovations].each do | i |
           innovation = Innovation.find_by_id(i[:id])
           OrganizationInnovation.create({
             organization: @organization,
