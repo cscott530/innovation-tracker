@@ -1,16 +1,10 @@
 angular.module('it.organization.edit', ['it.resources', 'ui.select2'])
 .controller('EditOrganizationCtrl', function($scope, $routeParams, $location, Organization, Innovation) {
-	var remapCategories = function() {
-		if ($scope.organization && $scope.organization.$resolved
-			&& $scope.innovations && $scope.innovations.$resolved) {
-		}
-	}
-	$scope.innovations = Innovation.query(remapCategories);
+	$scope.innovations = Innovation.query();
 	var organizationId = $routeParams.id;
 	if (organizationId) {
 		$scope.organization = Organization.get({ id: organizationId }, function(org) {
 			$scope.title = 'Editing ' + org.name;
-			remapCategories();
 		});
 
 	} else {
@@ -29,6 +23,8 @@ angular.module('it.organization.edit', ['it.resources', 'ui.select2'])
 		}
 	};
 	$scope.deleteOrganization = function() {
+		//TODO confirmation
 		$scope.organization.$delete();
+		successfulUpdate();
 	};
 });
