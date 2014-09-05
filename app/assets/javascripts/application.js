@@ -15,6 +15,8 @@
 //= require ../../../vendor/assets/bower_components/angular/angular.js
 //= require ../../../vendor/assets/bower_components/angular-route/angular-route.js
 //= require ../../../vendor/assets/bower_components/angular-resource/angular-resource.js
+//= require ../../../vendor/assets/bower_components/select2/select2.js
+//= require ../../../vendor/assets/bower_components/angular-ui-select2/src/select2.js
 //= require turbolinks
 //= require_tree .
 

@@ -3,6 +3,8 @@
  *= require ../../../vendor/assets/bower_components/bootstrap/dist/css/bootstrap
  *= require ../../../vendor/assets/bower_components/bootstrap/dist/css/bootstrap-theme
  *= require ../../../vendor/assets/bower_components/fontawesome/css/font-awesome
+ *= require ../../../vendor/assets/bower_components/select2/select2
+ *= require ../../../vendor/assets/bower_components/select2/select2-bootstrap
  *
  * To get the advantages of SASS, all styling is in style.scss, not in here.
  *= require_tree .
