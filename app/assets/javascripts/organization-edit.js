@@ -1,24 +1,11 @@
 angular.module('it.organization.edit', ['it.resources', 'ui.select2'])
-.controller('EditOrganizationCtrl', function($scope, $routeParams, $location, Organization, Category) {
+.controller('EditOrganizationCtrl', function($scope, $routeParams, $location, Organization, Innovation) {
 	var remapCategories = function() {
-		if ($scope.organization && $scope.categories) {
-			var flattenedScopedInnovations = [];
-			angular.forEach($scope.categories, function(category, i) {
-				angular.forEach(category.innovations, function(innovation, j) {
-					flattenedScopedInnovations.push(innovation);
-				});
-			});
-			$scope.organization.innovations = $.map($scope.organization.innovations, function(i, innovation) {
-				for (var j = 0; j < flattenedScopedInnovations.length; j++) {
-					if (flattenedScopedInnovations[j].id == innovation.id) {
-						return flattenedScopedInnovations[j];
-					}
-				}
-				return null;
-			});
+		if ($scope.organization && $scope.organization.$resolved
+			&& $scope.innovations && $scope.innovations.$resolved) {
 		}
 	}
-	$scope.categories = Category.query(remapCategories);
+	$scope.innovations = Innovation.query(remapCategories);
 	var organizationId = $routeParams.id;
 	if (organizationId) {
 		$scope.organization = Organization.get({ id: organizationId }, function(org) {
