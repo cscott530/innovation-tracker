@@ -1,5 +1,6 @@
-angular.module('it.organization.edit', ['it.resources'])
-.controller('EditOrganizationCtrl', function($scope, $routeParams, $location, Organization) {
+angular.module('it.organization.edit', ['it.resources', 'ui.select2'])
+.controller('EditOrganizationCtrl', function($scope, $routeParams, $location, Organization, Innovation) {
+	$scope.innovations = Innovation.query();
 	var organizationId = $routeParams.id;
 	if (organizationId) {
 		$scope.organization = Organization.get({ id: organizationId }, function(org) {
@@ -22,6 +23,8 @@ angular.module('it.organization.edit', ['it.resources'])
 		}
 	};
 	$scope.deleteOrganization = function() {
+		//TODO confirmation
 		$scope.organization.$delete();
+		successfulUpdate();
 	};
 });

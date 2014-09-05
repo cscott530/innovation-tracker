@@ -19,4 +19,11 @@
 		<label for="description">Description</label>
 		<textarea class="form-control" id="description" ng-model="organization.description" />
 	</div>
+	<div class="form-group">
+		<label for="innovations">Innovations</label>
+		<select class="form-control" id="innovations" multiple 
+			ng-options="innovation.name group by innovation.category.name for innovation in innovations track by innovation.id"
+			ng-model="organization.innovations">
+		</select>
+	</div>
 </div>
