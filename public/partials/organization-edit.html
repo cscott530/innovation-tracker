@@ -24,7 +24,11 @@
 		<select class="form-control" id="innovations" multiple 
 			ui-select2
 			ng-model="organization.innovations">
-			<option ng-repeat="innovation in innovations" value="{{innovation.id}}">{{innovation.name}}</option>
+			<optgroup ng-repeat="category in categories|orderBy:category.order" label="{{category.name}}">
+				<option ng-repeat="innovation in category.innovations|orderBy:innovation.order" value="{{innovation.id}}">
+					{{innovation.name}}
+				</option>
+			</optgroup>
 		</select>
 	</div>
 </div>
