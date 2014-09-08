@@ -5,6 +5,9 @@ angular.module('it.organization.edit', ['it.resources', 'ui.select2'])
 	if (organizationId) {
 		$scope.organization = Organization.get({ id: organizationId }, function(org) {
 			$scope.title = 'Editing ' + org.name;
+			$scope.organization.innovations = $.map($scope.organization.innovations, function(orgInn, index) {
+				return index;
+			});
 		});
 
 	} else {
