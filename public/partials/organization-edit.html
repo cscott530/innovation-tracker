@@ -22,8 +22,13 @@
 	<div class="form-group">
 		<label for="innovations">Innovations</label>
 		<select class="form-control" id="innovations" multiple 
-			ng-options="innovation.name group by innovation.category.name for innovation in innovations track by innovation.id"
+			ui-select2
 			ng-model="organization.innovations">
+			<optgroup ng-repeat="category in categories|orderBy:category.order" label="{{category.name}}">
+				<option ng-repeat="innovation in category.innovations|orderBy:innovation.order" value="{{innovation.id}}">
+					{{innovation.name}}
+				</option>
+			</optgroup>
 		</select>
 	</div>
 </div>
